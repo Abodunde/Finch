@@ -8,23 +8,23 @@ Consequently, to run a prediction on entirely new reddit comments, the following
 STEP 1:
 
 
-import re
+    import re
 
-from nltk.corpus import stopwords
+    from nltk.corpus import stopwords
 
-from nltk.tokenize import word_tokenize
+    from nltk.tokenize import word_tokenize
 
-def preprocess_text(text):
-    text = text.lower() #lowercase conversion
-    text = re.sub(r'[^a-zA-Z\s]', '', text) #removal of special characters
-    tokens = word_tokenize(text) #tokenization of the text
+    def preprocess_text(text):
+        text = text.lower() #lowercase conversion
+        text = re.sub(r'[^a-zA-Z\s]', '', text) #removal of special characters
+        tokens = word_tokenize(text) #tokenization of the text
     
-    stop_words = set(stopwords.words('english')) #load the stopword instance
-    filtered_tokens = [token for token in tokens if token not in stop_words] #remove stopwords
+        stop_words = set(stopwords.words('english')) #load the stopword instance
+        filtered_tokens = [token for token in tokens if token not in stop_words] #remove stopwords
     
-    preprocessed_text = ' '.join(filtered_tokens) # Join the tokens back into a single string
+        preprocessed_text = ' '.join(filtered_tokens) # Join the tokens back into a single string
     
-    return preprocessed_text
+        return preprocessed_text
 
 The preprocess_text function tokenizes, removes special characters, and removes stopwords.
 
