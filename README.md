@@ -7,8 +7,11 @@ Consequently, to run a prediction on entirely new reddit comments, the following
 
 STEP 1:
 
+
 import re
+
 from nltk.corpus import stopwords
+
 from nltk.tokenize import word_tokenize
 
 def preprocess_text(text):
