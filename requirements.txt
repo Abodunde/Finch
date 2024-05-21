@@ -1,0 +1,9 @@
+pandas
+numpy
+spacy
+re
+nltk
+warnings
+sklearn
+xgboost
+joblib
