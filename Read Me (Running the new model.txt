@@ -1,43 +1,24 @@
-# Import the Following Libraries first
+In the Python code I designed to classify Reddit comments into categories related to veterinarians, medical doctors, or others, I employed a combination of regular expressions and natural language processing techniques. Here's how I structured the solution:
 
+1. Initialization of Regular Expressions:
+   - I defined two regular expressions: `medical_doctor_regex` to identify phrases like "medical student" or "nurse", and `veterinarian_regex` for phrases like "vet student" or "vet tech".
 
-from sqlalchemy import create_engine, inspect
-import pandas as pd
-import numpy as np
-import spacy
-import re
-from nltk.corpus import wordnet
+2. Supportive Functions:
+   - `other_words_check`: This function uses the regular expressions I set up to check if a comment contains specific keywords indicating either a doctor or veterinarian context.
+   - **`get_related_keywords`**: Here, I retrieve synonyms and antonyms for a given word using the WordNet database, which helps in broadening the keyword base to include relevant terms, especially useful for filtering out student-related contexts.
 
-nlp = spacy.load('en_core_web_md')# Load spaCy's English language model with NER
+3. Main Classification Function - `similarity_check`:
+   - I designed this function to expand the keywords by including their synonyms in the comparison. It then computes the similarity between these keywords and each word in the comment.
+   - I utilized an NLP library to calculate similarity scores, aiming for a threshold of 0.70 to classify a comment as related to the specified keyword.
+   - The function also incorporates `other_words_check` to ensure comments matching excluded criteria (like student-related terms) aren't misclassified.
 
-import warnings
-warnings.filterwarnings("ignore")
+4. Application of Classification Functions:
+   - I applied `similarity_check` to each comment in the DataFrame for both veterinary and doctor-related categories, creating two separate columns that record these classifications.
 
-import re
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer
-from xgboost import XGBClassifier
-from sklearn.metrics import accuracy_score
-from sklearn.preprocessing import LabelEncoder
+5. Final Label Assignment:
+   - Through the `label_assignment` function, I determined the ultimate categorization of each comment. If both categories indicate a match, the veterinary label is preferred, otherwise, the appropriate single category is assigned, or it defaults to "others" if neither category is matched.
 
+6. Labeling the DataFrame:
+   - Finally, I used the `label_assignment` function to assign the definitive label to each comment, effectively categorizing each into one of the three desired groups.
 
-# To run the prediction, load the saved model as follows
-import joblib
-pipeline = joblib.load('complete_text_processing_pipeline.pkl')
-
-# Run the prediction
-
-prediction = pipeline.predict_proba([comment])
-predicted_class_indices = np.argmax(prediction, axis=1)
-#Where comment is the new comment. Kindly note that if it is a string, it should be encapsulated in a list []
-
-
-To get the final label, load the transformer as shown below:
-
-encoder= joblib.load('label_encoder.pkl')
-
-#convert the prediction to the actual label:
-
-label = encoder.inverse_transform(predicted_class_indices)
+This code that I designed integrates direct keyword matching with semantic analysis to provide a nuanced approach to text classification, enhancing the ability to accurately categorize textual data based on content relevance.
