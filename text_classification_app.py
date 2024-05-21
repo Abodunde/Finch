@@ -15,6 +15,8 @@ import numpy as np
 import spacy
 import re
 from nltk.corpus import wordnet
+from sklearn.base import BaseEstimator, TransformerMixin
+
 
 def load_spacy_model(model_name='en_core_web_md'):
     try:
