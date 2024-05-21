@@ -1,7 +1,7 @@
 pandas
 numpy
 spacy==3.7.2
-https://github.com/explosion/spacy-models/releases/download/de_core_news_md-3.4.0/de_core_news_md-3.4.0.tar.gz
+https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.7.1/en_core_web_md-3.7.1.tar.gz
 nltk==3.7
 scikit-learn
 xgboost
