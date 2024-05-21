@@ -2,6 +2,25 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
+import re
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import LabelEncoder
+import pandas as pd
+import numpy as np
+import spacy
+import re
+from nltk.corpus import wordnet
+
+nlp = spacy.load('en_core_web_md')# Load spaCy's English language model with NER
+
+import warnings
+warnings.filterwarnings("ignore")
+
 
 # Load your trained model and label encoder
 model = joblib.load('complete_text_processing_pipeline.pkl')
