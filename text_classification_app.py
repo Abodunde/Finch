@@ -16,7 +16,12 @@ import spacy
 import re
 from nltk.corpus import wordnet
 from sklearn.base import BaseEstimator, TransformerMixin
-
+nltk_resources = ["punkt", "wordnet", "averaged_perceptron_tagger"]
+for resource in nltk_resources:
+    try:
+        nltk.data.find(resource)
+    except LookupError:
+        nltk.download(resource)
 
 def load_spacy_model(model_name='en_core_web_md'):
     try:
