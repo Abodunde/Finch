@@ -17,6 +17,7 @@ import re
 from nltk.corpus import wordnet
 from sklearn.base import BaseEstimator, TransformerMixin
 nltk_resources = ["punkt", "wordnet", "averaged_perceptron_tagger"]
+imprt nltk
 for resource in nltk_resources:
     try:
         nltk.data.find(resource)
