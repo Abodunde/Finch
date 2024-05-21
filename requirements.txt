@@ -1,8 +1,8 @@
 pandas
 numpy
 spacy==3.7.2
-nltk
-warnings
-sklearn
-xgboost
+nltk==3.7
+sklearn==1.2.2
+xgboost==2.0.3
 joblib
+streamlit
