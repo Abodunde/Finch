@@ -16,15 +16,15 @@ import spacy
 import re
 from nltk.corpus import wordnet
 
-# def load_spacy_model(model_name='en_core_web_md'):
-#     try:
-#         return spacy.load(model_name)
-#     except OSError:
-#         print(f"{model_name} not found, downloading...")
-#         spacy.cli.download(model_name)
-#         return spacy.load(model_name)
+def load_spacy_model(model_name='en_core_web_md'):
+    try:
+        return spacy.load(model_name)
+    except OSError:
+        print(f"{model_name} not found, downloading...")
+        spacy.cli.download(model_name)
+        return spacy.load(model_name)
 
-# nlp = load_spacy_model()
+nlp = load_spacy_model()
 
 import warnings
 warnings.filterwarnings("ignore")
