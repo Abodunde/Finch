@@ -1,0 +1,43 @@
+# Import the Following Libraries first
+
+
+from sqlalchemy import create_engine, inspect
+import pandas as pd
+import numpy as np
+import spacy
+import re
+from nltk.corpus import wordnet
+
+nlp = spacy.load('en_core_web_md')# Load spaCy's English language model with NER
+
+import warnings
+warnings.filterwarnings("ignore")
+
+import re
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import LabelEncoder
+
+
+# To run the prediction, load the saved model as follows
+import joblib
+pipeline = joblib.load('complete_text_processing_pipeline.pkl')
+
+# Run the prediction
+
+prediction = pipeline.predict_proba([comment])
+predicted_class_indices = np.argmax(prediction, axis=1)
+#Where comment is the new comment. Kindly note that if it is a string, it should be encapsulated in a list []
+
+
+To get the final label, load the transformer as shown below:
+
+encoder= joblib.load('label_encoder.pkl')
+
+#convert the prediction to the actual label:
+
+label = encoder.inverse_transform(predicted_class_indices)
