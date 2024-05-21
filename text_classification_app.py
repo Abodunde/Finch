@@ -29,6 +29,25 @@ nlp = load_spacy_model()
 import warnings
 warnings.filterwarnings("ignore")
 
+class TextPreprocessor(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        self.stop_words = set(stopwords.words('english'))
+
+    def fit(self, X, y=None):
+        return self  # Nothing to fit
+
+    def transform(self, X):
+        # Apply preprocessing to each element in X
+        return [self.preprocess_text(text) for text in X]
+
+    def preprocess_text(self, text):
+        text = text.lower()  # Convert to lowercase
+        text = re.sub(r'[^a-zA-Z\s]', '', text)  # Remove special characters
+        tokens = word_tokenize(text)  # Tokenize
+        filtered_tokens = [token for token in tokens if token not in self.stop_words]  # Remove stopwords
+        return ' '.join(filtered_tokens)  # Join tokens back into a single string
+
+
 
 # Load your trained model and label encoder
 model = joblib.load('complete_text_processing_pipeline.pkl')
