@@ -2,7 +2,7 @@ pandas
 numpy
 spacy==3.7.2
 nltk==3.7
-sklearn
+scikit-learn
 xgboost
 joblib
 streamlit
