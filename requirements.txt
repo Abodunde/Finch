@@ -1,7 +1,6 @@
 pandas
 numpy
-spacy
-re
+spacy==3.7.2
 nltk
 warnings
 sklearn
